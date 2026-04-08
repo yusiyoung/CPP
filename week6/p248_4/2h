@@ -1,0 +1,20 @@
+#ifndef MINEMAPMASK_H
+#define MINEMAPMASK_H
+
+#include <iostream>
+#include <cstdlib>
+#include <ctime>
+using namespace std;
+
+#define MAX_ROW 40
+#define MAX_COL 80
+
+extern int MineMapMask[MAX_ROW][MAX_COL];
+extern int MineMapLabel[MAX_ROW][MAX_COL];
+
+void initMap(int row, int col);
+void placeMines(int row, int col, int mineCount);
+void makeLabels(int row, int col);
+void printMap(int row, int col);
+
+#endif
