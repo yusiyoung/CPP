@@ -1,0 +1,81 @@
+#include <iostream>
+#include <iomanip>
+using namespace std;
+
+class MyTime {
+private:
+    int hour;
+    int min;
+    int sec;
+    int msec;
+
+public:
+    MyTime() { hour = min = sec = msec = 0; }
+
+    inline void convert(double duration) {
+        int totalMsec = (int)(duration * 1000 + 0.5);
+
+        hour = totalMsec / 3600000;
+        totalMsec %= 3600000;
+
+        min = totalMsec / 60000;
+        totalMsec %= 60000;
+
+        sec = totalMsec / 1000;
+        msec = totalMsec % 1000;
+    }
+
+    inline void print() {
+        cout << setfill('0')
+             << setw(2) << hour << ":"
+             << setw(2) << min << ":"
+             << setw(2) << sec << ":"
+             << setw(3) << msec << endl;
+    }
+
+    inline MyTime add(MyTime t) {
+        MyTime result;
+
+        int total1 = hour * 3600000 + min * 60000 + sec * 1000 + msec;
+        int total2 = t.hour * 3600000 + t.min * 60000 + t.sec * 1000 + t.msec;
+        int sum = total1 + total2;
+
+        result.hour = sum / 3600000;
+        sum %= 3600000;
+
+        result.min = sum / 60000;
+        sum %= 60000;
+
+        result.sec = sum / 1000;
+        result.msec = sum % 1000;
+
+        return result;
+    }
+
+    inline void reset() {
+        hour = min = sec = msec = 0;
+    }
+};
+
+int main() {
+    MyTime t1, t2, t3;
+
+    t1.convert(3754.567);
+    t2.convert(125.250);
+
+    cout << "t1 = ";
+    t1.print();
+
+    cout << "t2 = ";
+    t2.print();
+
+    t3 = t1.add(t2);
+    cout << "t1 + t2 = ";
+    t3.print();
+
+    t3.reset();
+    cout << "reset 후 t3 = ";
+    t3.print();
+
+    return 0;
+}

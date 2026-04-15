@@ -1,0 +1,3 @@
+pig 돼지
+chicken 닭
+cow 소
